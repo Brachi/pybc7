@@ -1,11 +1,19 @@
 from array import array
 import ctypes
+import os
 import struct
 from ctypes import byref
 
-_bc7 = ctypes.cdll.LoadLibrary('./_bc7.so')
-_bc7.init(0)
+# XXX Linux only for now. Defined in compile.sh
+LIB_FILENAME = "_bc7.so"
+THIS_DIR = os.path.dirname(__file__)
+LIB_FILEPATH = os.path.join(THIS_DIR, LIB_FILENAME)
 
+
+_bc7 = ctypes.cdll.LoadLibrary(LIB_FILEPATH)
+
+# TOOD: consider doing it lazyly
+_bc7.init(0)
 bc7 = _bc7
 
 
@@ -193,7 +201,7 @@ def compress_bc7_image(rgba, width, height):
     return bytes(blocks)
 
 
-def unpack_dds(file_handle, width, height, dds_format, data_offset):
+def decode_dds(file_handle, width, height, dds_format, data_offset):
 
     if dds_format not in DDS_FORMATS_BLOCK_SIZE:
         raise TypeError(f"Invalid DDS format: {dds_format}")

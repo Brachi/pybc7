@@ -4,15 +4,28 @@
 This is still rough
 ⚠️
 
-
 Python bindings for [bc7enc_rdo](https://github.com/richgel999/bc7enc_rdo), a state of the art RDO BC1-7 GPU texture encoder library.
+
+## Pre requisite
+
+Checkout the library as a submodule:
+
+    git clone --recurse-submodules https://github.com/Brachi/pybc7
+
+Alternatively, once in the repo:
+
+    git submodule update --init
+
 
 ## Compiling
 
-`./compile.sh`
+
+    ./compile.sh
 
 
 ## Usage
+
+Sample code:
 
 
     from itertools import chain

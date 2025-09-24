@@ -9,18 +9,19 @@ jobs:
   build-win:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v4
-    - run: git submodule update --init --recursive bc7enc_rdo
+      - uses: actions/checkout@v4
+      - run: git submodule update --init --recursive bc7enc_rdo
 
-    - name: Setup MSBuild environment
-      shell: cmd
-      run: |
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\VsDevCmd.bat"
+      #- name: Setup MSBuild environment
+      #  shell: cmd
+      #  run: |
+      #      call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\VsDevCmd.bat"
 
-    - name: Build dll
-      run: |
-          cd bc7enc_rdo
-          cmake .
-          ls
-          msbuild ALL_BUILD.vcxproj
-          ls
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Build dll
+        run: |
+            cd bc7enc_rdo
+            cmake -G "NMake Makefiles" .
+            ls
+            nmake
+            ls

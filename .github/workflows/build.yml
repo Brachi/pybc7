@@ -1,0 +1,19 @@
+name: Build lib
+on:
+  push:
+    branches: [ "main", "ci" ]
+  pull_request:
+    branches: [ "main", "ci"]
+
+jobs:
+  build-win:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: git submodule update --init --recursive bc7enc_rdo
+
+    - name: Build dll
+      run: |
+          cd bc7enc_rdo
+          cmake .
+          make

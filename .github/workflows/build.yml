@@ -13,6 +13,7 @@ jobs:
     - run: git submodule update --init --recursive bc7enc_rdo
 
     - name: Setup MSBuild environment
+      shell: cmd
       run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\VsDevCmd.bat"
 

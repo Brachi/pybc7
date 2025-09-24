@@ -17,3 +17,5 @@ jobs:
           cd bc7enc_rdo
           cmake .
           ls
+          msbuild ALL_BUILD.vcxproj
+          ls

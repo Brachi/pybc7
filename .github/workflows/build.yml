@@ -20,6 +20,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Build dll
         run: |
+            cp CMakeLists.txt bc7enc_rdo/
             cd bc7enc_rdo
             cmake -G "NMake Makefiles" .
             ls

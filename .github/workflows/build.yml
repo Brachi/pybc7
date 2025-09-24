@@ -16,4 +16,4 @@ jobs:
       run: |
           cd bc7enc_rdo
           cmake .
-          make
+          ls

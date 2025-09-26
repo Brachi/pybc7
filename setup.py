@@ -2,6 +2,7 @@ import subprocess
 import os
 
 from setuptools import setup
+from setuptools.command.bdist_wheel import get_platform
 from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
 
 
@@ -29,8 +30,9 @@ class bdist_wheel(_bdist_wheel):
         super().run()
 
     def finalize_options(self):
-        _bdist_wheel.finalize_options(self)
         self.root_is_pure = False
+        self.plat_name = get_platform(None)
+        _bdist_wheel.finalize_options(self)
 
     def get_tag(self):
         python, abi, plat = _bdist_wheel.get_tag(self)

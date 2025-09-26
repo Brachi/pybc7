@@ -1,5 +1,13 @@
 .venv/
 *.so
+dist/
+*.egg-info*
+build/
+Makefile
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+tests-output/
 
 __pycache__/
 results/

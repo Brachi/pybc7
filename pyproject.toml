@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pybc7"
+version = "0.1.0"
+description = "TODO"
+readme = "README.md"
+authors = [ {name = "Sebastian Aguirre Brachi"}, {name = "Rich Geldreich"}]
+requires-python = ">=3.10, <=3.14"
+license = {file = "LICENSE"}
+keywords = ["dds", "bc7enc", "bc7enc_rdo"]
+
+dependencies = []
+
+[project.optional-dependencies]
+
+tests = ["pytest", "pillow"]
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+[tool.setuptools.package-data]
+pybc7 = ["pybc7.so", "pybc7.dll"]

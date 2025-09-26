@@ -2,11 +2,17 @@ from array import array
 import ctypes
 import struct
 from ctypes import byref
+import os
 
-_bc7 = ctypes.cdll.LoadLibrary('./_bc7.so')
-_bc7.init(0)
+bc7 = None
+this_dir = os.path.dirname(__file__)
 
-bc7 = _bc7
+if not bc7:
+    try:
+        bc7 = ctypes.cdll.LoadLibrary(os.path.join(this_dir, 'pybc7.so'))
+    except OSError:
+        bc7 = ctypes.cdll.LoadLibrary(os.path.join(this_dir, 'pybc7.dll'))
+    bc7.init(0)
 
 
 class RGBA(ctypes.Structure):

@@ -1,28 +1,46 @@
-name: Build lib
+name: Build Wheels
 on:
   push:
     branches: [ "main", "ci" ]
   pull_request:
     branches: [ "main", "ci"]
 
-jobs:
-  build-win:
-    runs-on: windows-latest
+name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: git submodule update --init --recursive bc7enc_rdo
 
-      #- name: Setup MSBuild environment
-      #  shell: cmd
-      #  run: |
-      #      call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\VsDevCmd.bat"
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v3.2.0
 
-      - uses: ilammy/msvc-dev-cmd@v1
-      - name: Build dll
-        run: |
-            cp CMakeLists.txt bc7enc_rdo/
-            cd bc7enc_rdo
-            cmake -G "NMake Makefiles" .
-            ls
-            nmake
-            ls
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
+          path: ./wheelhouse/*.whl
+
+#jobs:
+#  build-win:
+#    runs-on: windows-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#      - run: git submodule update --init --recursive bc7enc_rdo
+#
+#      #- name: Setup MSBuild environment
+#      #  shell: cmd
+#      #  run: |
+#      #      call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\VsDevCmd.bat"
+#
+#      - uses: ilammy/msvc-dev-cmd@v1
+#      - name: Build dll
+#        run: |
+#            cp CMakeLists.txt bc7enc_rdo/
+#            cd bc7enc_rdo
+#            cmake -G "NMake Makefiles" .
+#            ls
+#            nmake
+#            ls

@@ -15,13 +15,10 @@ keywords = ["dds", "bc7enc", "bc7enc_rdo"]
 dependencies = []
 
 [project.optional-dependencies]
-
 tests = ["pytest", "pillow"]
-
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
 
 [tool.setuptools.package-data]
 pybc7 = ["pybc7.so", "pybc7.dll"]

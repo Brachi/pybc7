@@ -4,8 +4,9 @@ on:
     branches: [ "main", "ci" ]
   pull_request:
     branches: [ "main", "ci"]
-
-name: Build wheels on ${{ matrix.os }}
+jobs:
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:

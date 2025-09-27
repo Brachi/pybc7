@@ -12,7 +12,7 @@ extern "C" void bc7_init() {
 }
 
 
-extern "C" bool unpack_bc1(const void* pBlock_bits, void* pPixels, bool set_alpha, rgbcx::bc1_approx_mode mode) {
+extern "C" __declspec(dllexport) bool __cdecl unpack_bc1(const void* pBlock_bits, void* pPixels, bool set_alpha, rgbcx::bc1_approx_mode mode) {
     return rgbcx::unpack_bc1(pBlock_bits, pPixels, set_alpha, mode);
 }
 

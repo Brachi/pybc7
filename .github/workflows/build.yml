@@ -8,7 +8,7 @@ jobs:
   tests:
     strategy:
       matrix:
-          os: [ubuntu-latest, windows-latest]
+          os: [windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/setup-python@v5

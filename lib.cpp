@@ -17,16 +17,16 @@ extern "C" __declspec(dllexport) bool __cdecl unpack_bc1(const void* pBlock_bits
 }
 
 
-extern "C" bool unpack_bc7(const void* pBlock, bc7decomp::color_rgba* pPixels) {
+extern "C" __declspec(dllexport) bool __cdecl unpack_bc7(const void* pBlock, bc7decomp::color_rgba* pPixels) {
     return bc7decomp::unpack_bc7(pBlock, pPixels);
 }
 
 
-extern "C" bool pack_bc7_block(void *pBlock, const void *pPixelsRGBA, const bc7enc_compress_block_params *pComp_params) {
+extern "C" __declspec(dllexport) bool __cdecl pack_bc7_block(void *pBlock, const void *pPixelsRGBA, const bc7enc_compress_block_params *pComp_params) {
     return bc7enc_compress_block(pBlock, pPixelsRGBA, pComp_params);
 }
 
-extern "C" void compress_image(uint8_t *rgba, int width, int height, void *blocks, const bc7enc_compress_block_params *pComp_params) {
+extern "C" __declspec(dllexport) void __cdecl compress_image(uint8_t *rgba, int width, int height, void *blocks, const bc7enc_compress_block_params *pComp_params) {
 
     // TODO: DXT
     int bytesPerBlock = 16; // ( ( flags & kDxt1 ) != 0 ) ? 8 : 16;
@@ -73,9 +73,7 @@ extern "C" void compress_image(uint8_t *rgba, int width, int height, void *block
 }
 
 
-
-
-extern "C" void rearrange_pixels(uint8_t* targetRgba, uint8_t* rgba, int x, int y, int width, int height) {
+extern "C" __declspec(dllexport) void __cdecl rearrange_pixels(uint8_t* targetRgba, uint8_t* rgba, int x, int y, int width, int height) {
     /* move unpacked block pixels to correct location in image
      * Adapted from https://github.com/castano/nvidia-texture-tools/blob/master/src/nvtt/squish/squish.cpp#L176
     */

@@ -3,7 +3,7 @@
 #include "bc7enc_rdo/bc7enc.h"
 
 
-extern "C" void init(rgbcx::bc1_approx_mode mode = rgbcx::bc1_approx_mode::cBC1Ideal) {
+extern "C" __declspec(dllexport) void __cdecl init(rgbcx::bc1_approx_mode mode = rgbcx::bc1_approx_mode::cBC1Ideal) {
     return rgbcx::init(mode);
 }
 

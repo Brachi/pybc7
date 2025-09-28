@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pybc7"
 version = "0.1.0"
-description = "TODO"
+description = "Python bindings for bc7enc_rdo, state of the art RDO BC1-7 GPU texture encoders"
 readme = "README.md"
 authors = [ {name = "Sebastian Aguirre Brachi"}, {name = "Rich Geldreich"}]
-requires-python = ">=3.9, <=3.14"
-license = {file = "LICENSE"}
-keywords = ["dds", "bc7enc", "bc7enc_rdo"]
+requires-python = ">=3.10"
+license = "MIT"
+keywords = ["dds", "bc7", "bc7enc", "bc7enc_rdo"]
 
 dependencies = []
 
@@ -21,4 +21,9 @@ tests = ["pytest", "pillow"]
 where = ["src"]
 
 [tool.setuptools.package-data]
+# Compiled in setup.py
 pybc7 = ["pybc7.so", "pybc7.dll"]
+
+[tool.cibuildwheel]
+build = "cp310-*"
+skip = ["*musllinux*", "*-win32"]

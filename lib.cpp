@@ -2,8 +2,14 @@
 #include "bc7enc_rdo/bc7decomp.h"
 #include "bc7enc_rdo/bc7enc.h"
 
+#ifdef _WIN32
+    #define LIB_EXPORT __declspec(dllexport)
+#else
+    #define LIB_EXPORT
+#endif
 
-extern "C" __declspec(dllexport) void init(rgbcx::bc1_approx_mode mode = rgbcx::bc1_approx_mode::cBC1Ideal) {
+
+extern "C" LIB_EXPORT void init(rgbcx::bc1_approx_mode mode = rgbcx::bc1_approx_mode::cBC1Ideal) {
     return rgbcx::init(mode);
 }
 
@@ -12,21 +18,21 @@ extern "C" void bc7_init() {
 }
 
 
-extern "C" __declspec(dllexport) bool unpack_bc1(const void* pBlock_bits, void* pPixels, bool set_alpha, rgbcx::bc1_approx_mode mode) {
+extern "C" LIB_EXPORT bool unpack_bc1(const void* pBlock_bits, void* pPixels, bool set_alpha, rgbcx::bc1_approx_mode mode) {
     return rgbcx::unpack_bc1(pBlock_bits, pPixels, set_alpha, mode);
 }
 
 
-extern "C" __declspec(dllexport) bool unpack_bc7(const void* pBlock, bc7decomp::color_rgba* pPixels) {
+extern "C" LIB_EXPORT bool unpack_bc7(const void* pBlock, bc7decomp::color_rgba* pPixels) {
     return bc7decomp::unpack_bc7(pBlock, pPixels);
 }
 
 
-extern "C" __declspec(dllexport) bool pack_bc7_block(void *pBlock, const void *pPixelsRGBA, const bc7enc_compress_block_params *pComp_params) {
+extern "C" LIB_EXPORT bool pack_bc7_block(void *pBlock, const void *pPixelsRGBA, const bc7enc_compress_block_params *pComp_params) {
     return bc7enc_compress_block(pBlock, pPixelsRGBA, pComp_params);
 }
 
-extern "C" __declspec(dllexport) void compress_image(uint8_t *rgba, int width, int height, void *blocks, const bc7enc_compress_block_params *pComp_params) {
+extern "C" LIB_EXPORT void compress_image(uint8_t *rgba, int width, int height, void *blocks, const bc7enc_compress_block_params *pComp_params) {
 
     // TODO: DXT
     int bytesPerBlock = 16; // ( ( flags & kDxt1 ) != 0 ) ? 8 : 16;
@@ -73,7 +79,7 @@ extern "C" __declspec(dllexport) void compress_image(uint8_t *rgba, int width, i
 }
 
 
-extern "C" __declspec(dllexport) void rearrange_pixels(uint8_t* targetRgba, uint8_t* rgba, int x, int y, int width, int height) {
+extern "C" LIB_EXPORT void rearrange_pixels(uint8_t* targetRgba, uint8_t* rgba, int x, int y, int width, int height) {
     /* move unpacked block pixels to correct location in image
      * Adapted from https://github.com/castano/nvidia-texture-tools/blob/master/src/nvtt/squish/squish.cpp#L176
     */

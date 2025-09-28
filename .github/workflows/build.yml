@@ -8,7 +8,7 @@ jobs:
   tests:
     strategy:
       matrix:
-          os: [windows-latest]
+          os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/setup-python@v5
@@ -43,25 +43,3 @@ jobs:
         with:
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: ./wheelhouse/*.whl
-
-#jobs:
-#  build-win:
-#    runs-on: windows-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#      - run: git submodule update --init --recursive bc7enc_rdo
-#
-#      #- name: Setup MSBuild environment
-#      #  shell: cmd
-#      #  run: |
-#      #      call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\VsDevCmd.bat"
-#
-#      - uses: ilammy/msvc-dev-cmd@v1
-#      - name: Build dll
-#        run: |
-#            cp CMakeLists.txt bc7enc_rdo/
-#            cd bc7enc_rdo
-#            cmake -G "NMake Makefiles" .
-#            ls
-#            nmake
-#            ls

@@ -12,6 +12,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
       - uses: actions/checkout@v4
       - run: git submodule update --init --recursive bc7enc_rdo
       - name: Run on ${{ matrix.os }}

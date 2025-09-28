@@ -1,4 +1,5 @@
 import subprocess
+import shutil
 import os
 
 from setuptools import setup
@@ -10,17 +11,12 @@ class bdist_wheel(_bdist_wheel):
 
     def run(self) -> None:
 
-        cmake_args = [
-            'cmake',
-            os.path.abspath('.'), # Path to your CMakeLists.txt
-        ]
+        cmake_args = ['cmake', os.path.abspath('.')]
         subprocess.check_call(cmake_args, cwd='.')
 
-        # Build with CMake
         build_args = ['cmake', '--build', '.', '--config', 'Release']
         subprocess.check_call(build_args, cwd='.')
 
-        import shutil
         base_dir = os.getcwd()
         try:
             shutil.move(os.path.join(base_dir, "pybc7.so"), "src/pybc7/pybc7.so")

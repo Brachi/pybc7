@@ -9,7 +9,7 @@ set (BC7ENC_SRC_LIST
 	bc7enc_rdo/bc7decomp.h
 	bc7enc_rdo/rgbcx.cpp
 	bc7enc_rdo/rgbcx.h
-	lib.cpp
+	wrapper.cpp
 	)
 
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
